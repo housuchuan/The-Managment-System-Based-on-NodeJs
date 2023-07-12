@@ -7,16 +7,20 @@
  */
 
 import { Tabs } from 'antd';
+import { useState } from 'react';
 import Login from './components/Login'
 import Register from './components/Register'
+import CopyRight from '@/components/CopyRight';
 import styles from './index.module.scss';
 
 const index = () => {
+   const [activeKey, setActiveKey] = useState('login')
+
    const tabs = [
       {
          key: 'login',
          label: '密码登录',
-         children: <Login />,
+         children: <Login forgetPw={setActiveKey} />,
       },
       {
          key: 'register',
@@ -25,15 +29,14 @@ const index = () => {
       }
    ]
 
-   const onChange = (label) => {
-      console.log(label);
-   };
-
    return (
       <div className={styles.container}>
          <div className={styles.wrapper}>
-            <h4 className={styles.title}>H&D Design</h4>
-            <Tabs defaultActiveKey="login" centered tabBarGutter={100} items={tabs} onChange={onChange} />
+            <div className={styles.content}>
+               <h4 className={styles.title}>H&D Design</h4>
+               <Tabs activeKey={activeKey} centered tabBarGutter={100} items={tabs} onChange={label=>setActiveKey(label)} />
+            </div>
+            <CopyRight />
          </div>
       </div>
    )

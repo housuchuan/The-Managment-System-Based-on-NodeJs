@@ -11,8 +11,8 @@ import styles from './index.module.scss'
 
 const CopyRight = function () {
    return <div className={styles.copyRight}>
-      <CopyrightOutlined />
-      <p>2023 Build By H&D</p>
+      <CopyrightOutlined />&nbsp;&nbsp;&nbsp;
+      <p className={styles.text}>2023 Build By H&D</p>
    </div>
 }
 

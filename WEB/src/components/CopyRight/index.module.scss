@@ -1,3 +1,12 @@
 .copyRight {
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0px;
+  font-size: 14px;
+  font-style: italic;
+  color: #333;
+  .text {
+    margin: 0px;
+  }
 }
