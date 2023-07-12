@@ -1,0 +1,10 @@
+# ESLint 忽略特定的文件和目录
+/node_modules/**
+
+/config/**
+
+/build/**
+
+/public/**
+
+/scripts/**

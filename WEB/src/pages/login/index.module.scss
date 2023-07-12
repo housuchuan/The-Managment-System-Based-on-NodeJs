@@ -1,0 +1,29 @@
+.container {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100vw;
+    height: 100vh;
+    background: #f0f2f5 url("~@assets/bg.svg") repeat center;
+    .wrapper {
+        width: 300px;
+        margin: 0px auto;
+        .title {
+            padding: 60px 0px;
+            text-align: center;
+            color: rgba(0,0,0,.85);
+            font-size: 30px;
+            font-weight: 600;
+            background: radial-gradient(#1677ff , #000);
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+        }
+        :global {
+            .ant-tabs-nav {
+                margin-bottom: 30px;
+            }
+            .ant-tabs-tab {
+                font-size: 15px;
+            }
+        }
+    }
+}

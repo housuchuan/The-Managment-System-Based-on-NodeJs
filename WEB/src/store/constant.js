@@ -1,0 +1,11 @@
+// reducers行为
+// 加法
+export const INCREMENT_REDUCER = 'INCREMENT_REDUCER'
+// 减法
+export const DECREMENT_REDUCER = 'DECREMENT_REDUCER'
+// 乘法
+export const MULTIPLICATION_REDUCER = 'MULTIPLICATION_REDUCER'
+// 除法
+export const DIVISION_REDUCER = 'DIVISION_REDUCER'
+// person
+export const PERSON_ADD = 'PERSON_ADD'
