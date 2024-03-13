@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Space, Button, Table, Tag, Input, Popconfirm, Modal, Form, Select, message } from 'antd'
 import { UserAddOutlined } from '@ant-design/icons'
-import API from '@/service'
+import { user } from '@/api'
 import styles from './index.module.scss'
 const { Search } = Input
 // 栏目定义
@@ -103,13 +103,7 @@ const Index = () => {
      * @description 获取接口用户数据
      */
    const requestUsers = (keyword = '') => {
-      API({
-         method: 'GET',
-         url: '/user/queryUsers',
-         params: {
-            keyword
-         }
-      }).then(res => {
+      user.querySysUsers({keyword}).then(res => {
          setUsers(res.data.map(({ id, userName, nickName, sex, mobile, email, authorities }) => ({
             id,
             userName,
@@ -128,17 +122,15 @@ const Index = () => {
       }).catch(() => {})
    }
    /**
-     * @param userInfo: {
-     *
-     * }
-     * @return void
-     * @description 新增系统用户
-     */
+    *
+    * }
+    * @return void
+    * @description 新增系统用户
+    * @param userInfo
+    * @param callback
+    */
    const addSysUser = (userInfo = {}, callback = () => {}) => {
-      API({
-         url: '/user/addUser',
-         params: userInfo
-      }).then(res => {
+      user.addSysUser(userInfo).then(res => {
          callback()
          messageApi.success(res.message).then(() => {
             requestUsers()
@@ -146,17 +138,14 @@ const Index = () => {
       }).catch(() => {})
    }
    /**
-     * @param userInfo: {
-     *
-     * }
-     * @return void
-     * @description 新增系统用户
-     */
+    *
+    * }
+    * @return void
+    * @description 新增系统用户
+    * @param userInfo
+    */
    const editSysUser = (userInfo = {}) => {
-      API({
-         url: '/user/editUser',
-         params: userInfo
-      }).then(res => {
+      user.editSysUser(userInfo).then(res => {
          messageApi.success(res.message).then(() => {
             requestUsers()
          })
@@ -184,12 +173,9 @@ const Index = () => {
    /**
      * 用户删除操作 action
      */
-   function userDelete (user) {
-      API({
-         url: '/user/removeUser',
-         params: {
-            id: user.id
-         }
+   function userDelete (u) {
+      user.removeSysUser({
+         id: u.id
       }).then(res => {
          messageApi.success(res.message).then(() => {
             requestUsers()
@@ -209,7 +195,7 @@ const Index = () => {
             <Button onClick={() => showUserModal()}><UserAddOutlined />新增用户</Button>
             <Search placeholder="请输入姓名检索相关用户" enterButton="检索" onSearch={onSearch} />
          </Space>
-         <Table columns={columns} dataSource={users} rowKey={({ id }) => id} />
+         <Table columns={columns} dataSource={users} rowKey={({ id }) => id} Empty={{description: '暂无数据'}} />
          <Modal title={(userInfo ? '编辑' : '新增') + '系统用户信息'} cancelText='取消' okText='确认' open={isModalOpen} wrapClassName={styles.userModal} onOk={handleOk} onCancel={() => setIsModalOpen(false)}>
             <Form labelCol={{ span: 6 }} wrapperCol={{ span: 16 }} form={form} name="user">
                <Form.Item name='userName' label="用户名" rules={[{ required: true, message: '请输入用户名!' }, { pattern: /^[a-zA-Z]([a-zA-Z0-9]|[._]){4,19}$/, message: '请输入正确的用户名!' }]}>

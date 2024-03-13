@@ -1,5 +1,5 @@
-# The-Managment-System-Based-on-NodeJs
-基于Node的后台管理系统
+# The-Management-System-Based-on-NodeJs
+### 基于Node的后台管理系统
 
 ### 项目结构
 ```
@@ -9,11 +9,11 @@
                 |---- user.js
                 |---- ***
             |---- db
-                |---- index.js
+                |---- request.js
             |---- routes
                 |---- user.js
                 |---- ***
-            |---- index.js
+            |---- request.js
             |---- nodemon.json
             |---- README.md
         |---- WEB
@@ -25,7 +25,7 @@
                     |---- user.js
                     |---- ***
                 |---- assets
-                    |---- images
+                    |---- common
                         |---- bg.svg
                         |---- ***
                 |---- components
@@ -37,12 +37,10 @@
                     |---- ***
                 |---- router
                     |---- index.js
-                |---- service
-                    |---- index.js
                 |---- store
                 |---- App.js
                 |---- App.scss
-                |---- index.js
+                |---- request.js
                 |---- ***
             |---- .babelrc
             |---- .eslintignore

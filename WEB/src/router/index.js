@@ -7,7 +7,7 @@ import Home from '@/pages/home'
 import User from '../pages/home/User'
 import Personal from '../pages/home/Personal'
 import Table from '../pages/home/Table'
-import NotFound from '../pages/notFound'
+import NotFound from '../pages/error/404'
 const routes = [
    {
       path: '/',

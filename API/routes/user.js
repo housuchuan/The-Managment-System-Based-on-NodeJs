@@ -1,18 +1,18 @@
 const express = require('express')
-const { insertUser, queryUser, updateUser, deleteUser } = require("../controllers/user")
+const { addSysUser, querySysUsers, editSysUser, removeSysUser } = require("../controllers/user")
 
 const user = express.Router()
 
 //新增用户
-user.post('/addUser',insertUser)
+user.post('/addSysUser',addSysUser)
 
 //删除用户
-user.post('/removeUser',deleteUser)
+user.post('/removeSysUser',removeSysUser)
 
 //更新用户
-user.post('/editUser',updateUser)
+user.post('/editSysUser',editSysUser)
 
 //用户查询
-user.get('/queryUsers',queryUser)
+user.get('/querySysUsers',querySysUsers)
 
 module.exports = user

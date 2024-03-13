@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs')
 const sql = require('../db')
 
 //新增用户
-const insertUser = async (req,res) => {
+const addSysUser = async (req,res) => {
     const {userName = '' ,passWord = '' , nickName = '', sex = 0, mobile = '', email = '', authorities = ''} = req.body,
         $sql = "INSERT INTO users(userName,passWord,nickName,sex,mobile,email,authorities) VALUES (?)",
         salt = bcrypt.genSaltSync(10),
@@ -34,7 +34,7 @@ const insertUser = async (req,res) => {
 }
 
 //删除用户
-const deleteUser = (req,res) => {
+const removeSysUser = (req,res) => {
     const {id = ''} = req.body,
         $sql = "DELETE FROM users WHERE id = ?"
     sql?.query($sql,[id],(error)=>{
@@ -51,7 +51,7 @@ const deleteUser = (req,res) => {
 }
 
 //更新用户
-const updateUser = (req,res) => {
+const editSysUser = (req,res) => {
     const {userName = '' ,passWord = '' , nickName = '', sex = 0, mobile = '', email = '', authorities = '', id = ''} = req.body;
     let $sql = "",
         $values = [];
@@ -92,7 +92,7 @@ async function QueryUserForName(userName = ''){
 }
 
 
-const queryUser = (req,res) => {
+const querySysUsers = (req,res) => {
     const { keyword = '' } = req.query || {}
     const q = 'SELECT * FROM users WHERE userName LIKE ?';
     sql?.query(q,[`%${keyword}%`],(error, results) => {
@@ -107,4 +107,4 @@ const queryUser = (req,res) => {
     })
 }
 
-module.exports = { insertUser , deleteUser , updateUser , queryUser }
+module.exports = { addSysUser , removeSysUser , editSysUser , querySysUsers }
