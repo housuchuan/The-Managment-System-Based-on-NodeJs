@@ -1,19 +1,28 @@
 # The-Management-System-Based-on-NodeJs
-### 基于Node的后台管理系统
+### 基于Nodejs的后台管理系统
+#### 技术栈 （express + mysql + react + antd）
 
 ### 项目结构
 ```
     project
         |---- API
-            |---- controllers
-                |---- addSysUser.js
-                |---- ***
-            |---- db
-                |---- request.js
-            |---- routes
-                |---- addSysUser.js
-                |---- ***
-            |---- request.js
+            |---- src
+                |---- controllers
+                    |---- user.js
+                    |---- ***
+                |---- db
+                    |---- index.js
+                |---- middleware
+                |---- models
+                    |---- user.js
+                    |---- ***
+                |---- public
+                |---- routes
+                    |---- user.js
+                    |---- ***
+                |---- services
+                    |---- user.js
+                    |---- ***
             |---- nodemon.json
             |---- README.md
         |---- WEB
