@@ -1,10 +1,10 @@
 {
   "name": "API",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/app.js",
   "license": "MIT",
   "scripts": {
-    "server": "nodemon index.js --host"
+    "server": "nodemon src/app.js --host"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

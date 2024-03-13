@@ -6,12 +6,12 @@
     project
         |---- API
             |---- controllers
-                |---- user.js
+                |---- addSysUser.js
                 |---- ***
             |---- db
                 |---- request.js
             |---- routes
-                |---- user.js
+                |---- addSysUser.js
                 |---- ***
             |---- request.js
             |---- nodemon.json
@@ -22,7 +22,7 @@
             |---- scripts
             |---- src
                 |---- api
-                    |---- user.js
+                    |---- addSysUser.js
                     |---- ***
                 |---- assets
                     |---- common
@@ -36,7 +36,7 @@
                     |---- login
                     |---- ***
                 |---- router
-                    |---- index.js
+                    |---- app.js
                 |---- store
                 |---- App.js
                 |---- App.scss

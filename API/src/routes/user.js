@@ -1,5 +1,5 @@
 const express = require('express')
-const { addSysUser, querySysUsers, editSysUser, removeSysUser } = require("../controllers/user")
+const { addSysUser, querySysUsers, editSysUser, removeSysUser, sysUserLogin } = require("../controllers/user")
 
 const user = express.Router()
 
@@ -14,5 +14,8 @@ user.post('/editSysUser',editSysUser)
 
 //用户查询
 user.get('/querySysUsers',querySysUsers)
+
+//用户登录
+user.get('/sysUserLogin',sysUserLogin)
 
 module.exports = user
