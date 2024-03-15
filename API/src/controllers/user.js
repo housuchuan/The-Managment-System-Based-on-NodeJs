@@ -66,7 +66,6 @@ const querySysUsers = async (req,res) => {
         const { keyword = '' } = req.query || {}
         let results = await userService.querySysUsers(keyword)
         res.status(200).json({
-            status: 200,
             message: '查询成功',
             data: results
         })
@@ -77,6 +76,23 @@ const querySysUsers = async (req,res) => {
 
 // 用户登录
 const sysUserLogin = async (req,res) => {
+    try {
+        const {userName = '', password = ''} = req.body
+        if(!userName || !password){
+            res.status(201).json({
+                message: '请填写用户名或密码',
+                data: ''
+            })
+        }else{
+            let results = await userService.sysUserLogin(req.body)
+            res.status(200).json({
+                message: '登录成功',
+                data: results
+            })
+        }
+    }catch (e) {
+        return res.status(201).json(e)
+    }
 
 }
 

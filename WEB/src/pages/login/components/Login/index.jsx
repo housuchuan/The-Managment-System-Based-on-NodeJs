@@ -8,11 +8,13 @@
 
 import PropTypes from 'prop-types';
 import {Button, Form, Input} from 'antd';
+import {user} from '@/api';
 import styles from './index.module.scss';
 
 const Login = function (props){
-   const onFinish = (values) => {
-      console.log('Success:', values);
+   const onFinish = async (values) => {
+      let res = await user.sysUserLogin(values)
+      console.log(res)
    };
 
    return <Form name="login" initialValues={{remember: true}} onFinish={onFinish} autoComplete="off">

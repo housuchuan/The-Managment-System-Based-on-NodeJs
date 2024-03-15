@@ -22,4 +22,8 @@ export default {
       method: 'GET',
       params: userInfo
    }),
+   sysUserLogin: (userInfo = {})=> request({
+      url: '/user/sysUserLogin',
+      params: userInfo
+   }),
 }

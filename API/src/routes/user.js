@@ -16,6 +16,6 @@ user.post('/editSysUser',editSysUser)
 user.get('/querySysUsers',querySysUsers)
 
 //用户登录
-user.get('/sysUserLogin',sysUserLogin)
+user.post('/sysUserLogin',sysUserLogin)
 
 module.exports = user

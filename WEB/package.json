@@ -2,6 +2,7 @@
   "name": "react-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "jellyhasky",
   "dependencies": {
     "@ant-design/icons": "^4.8.0",
     "@babel/core": "7.12.3",
