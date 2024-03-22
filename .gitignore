@@ -9,6 +9,7 @@
 
 # production
 /WEB/build
+/WEB/jellyhasky
 
 # misc
 **/.DS_Store

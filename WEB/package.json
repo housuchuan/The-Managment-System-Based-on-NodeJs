@@ -23,6 +23,7 @@
     "bfj": "^7.0.2",
     "camelcase": "^6.1.0",
     "case-sensitive-paths-webpack-plugin": "2.3.0",
+    "cross-env": "^7.0.3",
     "css-loader": "4.3.0",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
@@ -81,8 +82,8 @@
     "workbox-webpack-plugin": "5.1.4"
   },
   "scripts": {
-    "start": "NODE_ENV=development node scripts/start.js",
-    "build": "node scripts/build.js",
+    "start": "cross-env APP_NODE_ENV=development node scripts/start.js",
+    "build": "cross-env APP_NODE_ENV=production node scripts/build.js",
     "lint": "NODE_ENV=development eslint --fix --ext .jsx,.js src/",
     "test": "node scripts/test.js"
   },

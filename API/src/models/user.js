@@ -11,9 +11,7 @@ const sql = require('../db')
 const addSysUser = ($values) => {
     return new Promise((resolve, reject) => {
         const $sql = "INSERT INTO users(userName,passWord,nickName,sex,mobile,email,authorities) VALUES (?)"
-        sql?.connect();
         sql?.query($sql,[$values],(error)=>{
-            sql?.end();
             if(error) {
                 reject(error)
             }else{
@@ -27,9 +25,7 @@ const addSysUser = ($values) => {
 const queryUserWithName = (userName) => {
     return new Promise((resolve, reject) => {
         const $sql = 'SELECT * FROM users WHERE userName = ?';
-        sql?.connect();
         sql?.query($sql,[userName],(error, results) => {
-            sql?.end();
             if(error){
                 reject(error)
             }else{
@@ -43,9 +39,7 @@ const queryUserWithName = (userName) => {
 const removeSysUser = (id) => {
     return new Promise((resolve, reject) => {
         const $sql = "DELETE FROM users WHERE id = ?"
-        sql?.connect();
         sql?.query($sql,[id],(error)=>{
-            sql?.end();
             if(error){
                 reject(error)
             }else{
@@ -68,9 +62,7 @@ const editSysUser = (values) => {
             $sql = "UPDATE users SET userName = ?,nickName = ?,sex = ?,mobile = ?,email = ?,authorities = ? WHERE id = ?"
             $values = [userName,nickName,sex,mobile,email,authorities,id]
         }
-        sql?.connect();
         sql?.query($sql,$values,(error)=>{
-            sql?.end();
             if(error) {
                 reject(error)
             }else{
@@ -84,9 +76,7 @@ const editSysUser = (values) => {
 const querySysUsers = async (keyword) => {
     return new Promise((resolve, reject) => {
         const $sql = 'SELECT * FROM users WHERE userName LIKE ?';
-        sql?.connect();
         sql?.query($sql,[`%${keyword}%`],(error, results) => {
-            sql?.end();
             if(error) {
                 reject(error)
             }else{

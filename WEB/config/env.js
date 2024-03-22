@@ -90,6 +90,8 @@ function getClientEnvironment(publicUrl) {
         // which is why it's disabled by default.
         // It is defined here so it is available in the webpackHotDevClient.
         FAST_REFRESH: process.env.FAST_REFRESH !== 'false',
+        APP_NODE_ENV: process.env.APP_NODE_ENV,
+        API_BASE_URL: process.env.API_BASE_URL,
       }
     );
   // Stringify all values so we can feed into webpack DefinePlugin

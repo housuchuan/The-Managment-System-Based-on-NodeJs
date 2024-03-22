@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { message } from 'antd'
 const instance = axios.create({
-   baseURL: '/api',
+   baseURL: process.env.API_BASE_URL,
    timeout: 60000,
    headers: { 'content-type': 'application/json' },
    validateStatus (status) {

@@ -13,9 +13,9 @@ const userModel = require('../models/user')
 const addSysUser = async ($values) => {
     try{
         const {userName = '' ,passWord = '' , nickName = '', sex = 0, mobile = '', email = '', authorities = ''} = $values;
-        let salt = bcrypt.genSaltSync(10),
-            hashPWD = bcrypt.hashSync(passWord, salt),
-            $values = [userName,hashPWD,nickName,sex,mobile,email,authorities];
+        let salt = bcrypt.genSaltSync(10);
+        let hashPWD = bcrypt.hashSync(passWord, salt);
+        $values = [userName,hashPWD,nickName,sex,mobile,email,authorities];
         let users = await userModel.queryUserWithName(userName)
         if(users.length > 0){
             return Promise.reject({

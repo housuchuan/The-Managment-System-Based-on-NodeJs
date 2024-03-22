@@ -1,8 +1,15 @@
 const express = require("express"),
+    cors = require('cors'),
     app = express(),
     PORT = process.env.PORT || 3000,
     user = require('./routes/user');
 
+// 处理cors
+app.use(cors({
+    origin: 'http://120.27.145.235',
+    port: '3001',
+    optionsSuccessStatus: 200
+}))
 /**
  * 解析body参数
  * body (raw)
