@@ -1,6 +1,6 @@
 const index = () => {
    return (
-      <div>Table</div>
+      <div>statistics</div>
    )
 }
 export default index

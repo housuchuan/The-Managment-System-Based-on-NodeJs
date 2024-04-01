@@ -34,6 +34,7 @@ module.exports = {
       // 强制使用一致的换行风格
       'linebreak-style': [2, 'windows'],
       //换行空白数为0
-      'no-multiple-empty-lines': [2, {max: 1, maxEOF: 0, maxBOF: 0 }]
+      'no-multiple-empty-lines': [2, {max: 1, maxEOF: 0, maxBOF: 0 }],
+      'react/prop-types': 'off'
    }
 };

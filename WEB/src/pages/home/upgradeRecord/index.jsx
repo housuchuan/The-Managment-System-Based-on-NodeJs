@@ -1,6 +1,6 @@
 const index = () => {
    return (
-      <div></div>
+      <div>upgradeRecord</div>
    )
 }
 export default index

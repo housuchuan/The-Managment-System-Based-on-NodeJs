@@ -7,16 +7,13 @@
  */
 
 import { Tabs } from 'antd';
-import { useContext,useState } from 'react';
-import { ThemeContext } from '@/utils/themeContext'
+import { useState } from 'react';
 import Login from './components/Login'
 import Register from './components/Register'
 import CopyRight from '@/components/CopyRight';
 import styles from './index.module.scss';
 
 const index = () => {
-   const theme = useContext(ThemeContext)
-   console.log(theme)
    const [activeKey, setActiveKey] = useState('login')
 
    const tabs = [
@@ -40,13 +37,6 @@ const index = () => {
                <Tabs activeKey={activeKey} centered tabBarGutter={100} items={tabs} onChange={label=>setActiveKey(label)} />
             </div>
             <CopyRight />
-            <ThemeContext.Consumer>
-               {
-                  (theme)=>{
-                     console.log(theme)
-                  }
-               }
-            </ThemeContext.Consumer>
          </div>
       </div>
    )

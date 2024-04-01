@@ -2,36 +2,38 @@
  * @name: 路由配置表
  * @desc: 路由配置信息列表
  */
-import Login from '@/pages/login'
-import Home from '@/pages/home'
-import User from '../pages/home/User'
-import Personal from '../pages/home/Personal'
-import Table from '../pages/home/Table'
-import NotFound from '../pages/error/404'
-const routes = [
-   {
-      path: '/',
-      element: <Login />
-   }, {
-      path: '/user',
-      element: <Home />,
-      children: [
-         {
-            index: true,
-            element: <User />
-         },
-         {
-            path: 'personal',
-            element: <Personal />
-         },
-         {
-            path: 'table',
-            element: <Table />
-         }
-      ]
-   }, {
-      path: '*',
-      element: <NotFound />
-   }
-]
+
+import App from '@/App'
+import Container from '@/components/Container'
+
+import analysis from './analysis'
+import home from './home'
+import login from './login'
+import members from './members'
+import salary from './salary'
+
+import error from '@/pages/error/404'
+
+const routes = [{
+   component: App,
+   routes: [
+      ...login,
+      {
+         path: '/menu',
+         name: '菜单',
+         component: Container,
+         routes: [
+            ...home,
+            ...members,
+            ...salary,
+            ...analysis,
+         ]
+      },
+      {
+         path: '*',
+         component: error
+      }
+   ]
+}]
+
 export default routes

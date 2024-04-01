@@ -1,18 +1,12 @@
-import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom'
-import { ThemeContext } from '@/utils/themeContext'
-import routes from './router'
-const router = createBrowserRouter(routes,{
-   basename: '/jellyhasky'
-})
+import { renderRoutes } from 'react-router-config';
 import './App.scss';
 
-const App = () => {
+const App = ({ route }) => {
    return (
-      <ThemeContext.Provider value={{}}>
-         <RouterProvider router={router}>
-            <Route path='/' />
-         </RouterProvider>
-      </ThemeContext.Provider>
+      <div>
+         {renderRoutes(route.routes)}
+      </div>
    );
 };
+
 export default App;
