@@ -37,7 +37,7 @@ const App = ({ route }) => {
       <Layout className='App'>
          <Sider trigger={null} collapsible collapsed={collapsed}>
             <img src={ logo } className='App-logo' alt="logo" />
-            <Menu theme="dark" mode="inline" defaultOpenKeys={[(currentPath.match(/^\/(\w)+\/(\w)+/ig))[0]]} items={menus} />
+            <Menu theme="dark" mode="inline" defaultOpenKeys={[(currentPath.match(/^\/(\w)+\/(\w)+/ig) || [''])[0]]} items={menus} />
          </Sider>
          <Layout>
             <Header style={{ padding: '0 16px', background: colorBgContainer }}>
