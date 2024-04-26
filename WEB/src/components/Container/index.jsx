@@ -28,8 +28,12 @@ const App = ({ route }) => {
       },[])
    }
 
-   const onMenuClick = ({keyPath: [subMenuPath,menuPath]}) => {
-      setCurrentPath([menuPath,subMenuPath])
+   const onMenuChange = (e) => {
+      const [,path] = e
+      setCurrentPath([path,currentPath[1]])
+   }
+   const onSubMenuChange = ({key}) => {
+      setCurrentPath([currentPath[0],key])
    }
 
    useEffect(()=>{
@@ -43,7 +47,7 @@ const App = ({ route }) => {
       <Layout className='App'>
          <Sider trigger={null} collapsible collapsed={collapsed}>
             <img src={ logo } className='App-logo' alt="logo" />
-            <Menu theme="dark" mode="inline" defaultOpenKeys={[currentPath[0]]} selectedKeys={[currentPath[1]]} items={menus} onSelect={onMenuClick} />
+            <Menu theme="dark" mode="inline" openKeys={[currentPath[0]]} selectedKeys={[currentPath[1]]} items={menus} onOpenChange={onMenuChange} onClick={onSubMenuChange} />
          </Sider>
          <Layout>
             <Header style={{ padding: '0 16px', background: colorBgContainer }}>
