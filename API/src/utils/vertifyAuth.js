@@ -26,7 +26,7 @@ const verify = (req, res, next) => {
     }
     jwt.verify(token, config.JWT_SECRET_KEY, (error, data) => {
         if (error) {
-            res.status(202).json({
+            res.json({
                 status: 202,
                 message: '请先登录',
                 data: ''

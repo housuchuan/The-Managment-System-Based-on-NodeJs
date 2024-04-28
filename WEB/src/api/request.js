@@ -14,8 +14,10 @@ instance.interceptors.request.use( config => config, error => Promise.reject(err
 
 // 添加响应拦截器
 instance.interceptors.response.use(function (response) {
-   // 数据返回成功
-   return response.data
+   let data = response.data
+   if(data.status === 200) return data
+   message.error(data.message).then(() => {})
+   return Promise.reject(data)
 }, function (error) {
    message.error(error.message).then(() => {})
    // 响应失败返回提醒
@@ -25,17 +27,7 @@ instance.interceptors.response.use(function (response) {
 // 请求
 const request = ({ method = 'post', url = '', params = {} }) => {
    return new Promise((resolve, reject) => {
-      instance({method, url, [method === 'post' ? 'data' : 'params']: params || undefined}).then(res => {
-         if (res.status === 200) {
-            resolve(res)
-         } else {
-            message.error(res?.message).then(() => {
-               reject(res)
-            })
-         }
-      }).catch(error => {
-         reject(error)
-      })
+      instance({method, url, [method === 'post' ? 'data' : 'params']: params || undefined}).then(res =>  resolve(res)).catch(error => reject(error))
    })
 }
 export default request
