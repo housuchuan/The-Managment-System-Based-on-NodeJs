@@ -87,7 +87,14 @@ const querySysUsers = async (keyword) => {
 }
 
 // 用户登录
-const sysUserLogin = () => {
+const sysUserLogin = (userName) => {
+    return new Promise((resolve, reject)=>{
+        const $sql = 'SELECT ?? FROM ?? WHERE userName = ?'
+        sql?.query($sql,[['userName','passWord','nickName','authorities','uuid'],'users',userName],(error,results)=>{
+            if(error) reject(error)
+            resolve(results)
+        })
+    })
 
 }
 

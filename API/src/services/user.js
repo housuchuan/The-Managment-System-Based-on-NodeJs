@@ -7,6 +7,7 @@
  */
 
 const bcrypt = require('bcryptjs')
+const vertifyAuth = require('../utils/vertifyAuth')
 const userModel = require('../models/user')
 
 
@@ -71,8 +72,27 @@ const querySysUsers = async (keyword) => {
 }
 
 // 用户登录
-const sysUserLogin = async () => {
-
+const sysUserLogin = async (data) => {
+    const {userName:name, password} = data
+    try {
+        let users = await userModel.sysUserLogin(name)
+        if(users.length === 0) await Promise.reject('用户账号或密码错误！！')
+        let [user] = JSON.parse(JSON.stringify(users))
+        let {userName,passWord,nickName,authorities,uuid} = user
+        if(bcrypt.compareSync(password,passWord)){
+            return {
+                userName,
+                nickName,
+                authorities,
+                token: vertifyAuth.sigh({
+                    uuid
+                })
+            }
+        }
+        await Promise.reject('用户账号或密码错误！！')
+    }catch (e) {
+        return Promise.reject(e)
+    }
 }
 
 module.exports = {
