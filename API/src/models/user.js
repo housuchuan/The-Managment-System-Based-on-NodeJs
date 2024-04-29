@@ -10,7 +10,7 @@ const sql = require('../db')
 // 系统新增用户
 const addSysUser = ($values) => {
     return new Promise((resolve, reject) => {
-        const $sql = "INSERT INTO users(userName,passWord,nickName,sex,mobile,email,authorities) VALUES (?)"
+        const $sql = "INSERT INTO users(userName,passWord,nickName,sex,mobile,email,authorities,uuid) VALUES (?,UUID())"
         sql?.query($sql,[$values],(error)=>{
             if(error) {
                 reject(error)
