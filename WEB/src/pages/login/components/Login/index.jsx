@@ -7,14 +7,22 @@
  */
 
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom'
 import {Button, Form, Input} from 'antd';
+import { updateUser } from '@/store/slices/user';
 import {user} from '@/api';
 import styles from './index.module.scss';
 
 const Login = function (props){
+   const history = useHistory()
+   const dispatch = useDispatch()
    const onFinish = async (values) => {
-      let res = await user.sysUserLogin(values)
-      console.log(res)
+      try{
+         let res = await user.sysUserLogin(values)
+         dispatch(updateUser(res.data))
+         history.push('/menu')
+      }catch (e) { /* empty */ }
    };
 
    return <Form name="login" initialValues={{remember: true}} onFinish={onFinish} autoComplete="off">

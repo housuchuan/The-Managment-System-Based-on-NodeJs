@@ -1,5 +1,7 @@
 import axios from 'axios'
 import { message } from 'antd'
+import store from '@/store'
+
 const instance = axios.create({
    baseURL: process.env.API_BASE_URL,
    timeout: 60000,
@@ -10,7 +12,11 @@ const instance = axios.create({
 })
 
 // 添加请求拦截器
-instance.interceptors.request.use( config => config, error => Promise.reject(error))
+instance.interceptors.request.use( config => {
+   const { user: { userInfo } } = store.getState()
+   config.headers.authorization = userInfo?.token || '';
+   return config
+}, error => Promise.reject(error))
 
 // 添加响应拦截器
 instance.interceptors.response.use(function (response) {
