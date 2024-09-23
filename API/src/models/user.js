@@ -73,14 +73,21 @@ const editSysUser = (values) => {
 }
 
 // 模糊查询用户
-const querySysUsers = async (keyword) => {
+const querySysUsers = async (keyword, uuid) => {
     return new Promise((resolve, reject) => {
-        const $sql = 'SELECT * FROM users WHERE userName LIKE ?';
-        sql?.query($sql,[`%${keyword}%`],(error, results) => {
-            if(error) {
-                reject(error)
+        sql?.query('select authorities from users where uuid = ?', [uuid], (e, res)=> {
+            if(e) {
+                reject(e)
             }else{
-                resolve(results)
+                let authorities = res[0].authorities
+                const $sql = 'SELECT * FROM users WHERE userName LIKE ? AND authorities <= ?';
+                sql?.query($sql,[`%${keyword}%`, authorities <= 1 ? 1 : authorities],(error, results) => {
+                    if(error) {
+                        reject(error)
+                    }else{
+                        resolve(results)
+                    }
+                })
             }
         })
     })

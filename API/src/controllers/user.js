@@ -74,10 +74,10 @@ const editSysUser = async (req,res) => {
 }
 
 // 模糊查询用户
-const querySysUsers = async (req,res) => {
+const querySysUsers = async ({query, uuid = ''},res) => {
     try{
-        const { keyword = '' } = req.query || {}
-        let results = await userService.querySysUsers(keyword)
+        const { keyword = ''} = query || {}
+        let results = await userService.querySysUsers(keyword, uuid)
         return res.json({
             status: 200,
             message: '查询成功',
@@ -120,5 +120,33 @@ const sysUserLogin = async (req,res) => {
 
 }
 
-module.exports = { addSysUser , removeSysUser , editSysUser , querySysUsers, sysUserLogin }
+// 用户注册
+const registerSysUser = async (req,res) => {
+    let data = req.body
+    const {userName = '' ,passWord = ''} = data;
+    try {
+        if(!userName || !passWord){
+            res.json({
+                status: 201,
+                message: '用户名或密码缺失，请确认后新增',
+                data: ''
+            })
+        }else{
+            let result = await userService.addSysUser(data)
+            res.json({
+                status: 200,
+                message: '用户信息新增成功，请前往登录',
+                data: result
+            })
+        }
+    }catch (e) {
+        res.json({
+            status: 203,
+            message: e.toString(),
+            data: ''
+        })
+    }
+}
+
+module.exports = { addSysUser , removeSysUser , editSysUser , querySysUsers, sysUserLogin, registerSysUser }
 

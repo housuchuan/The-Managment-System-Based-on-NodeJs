@@ -26,4 +26,8 @@ export default {
       url: '/user/sysUserLogin',
       params: userInfo
    }),
+   registerSysUser: (userInfo = {})=> request({
+      url: '/user/registerSysUser',
+      params: userInfo
+   }),
 }

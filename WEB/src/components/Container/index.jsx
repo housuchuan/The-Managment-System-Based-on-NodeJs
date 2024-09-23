@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { renderRoutes } from 'react-router-config';
 import {
    MenuFoldOutlined,
@@ -17,7 +17,6 @@ const App = ({ route }) => {
    const {
       token: { colorBgContainer }
    } = theme.useToken()
-   const history = useHistory()
    const userInfo = useSelector(state => state.user.userInfo),
       dispatch = useDispatch()
 
@@ -43,7 +42,6 @@ const App = ({ route }) => {
 
    const exit = () => {
       dispatch(clearUser())
-      history.replace('/')
    }
 
    useEffect(()=>{
@@ -66,8 +64,12 @@ const App = ({ route }) => {
                   onClick: () => setCollapsed(!collapsed)
                })}
                <div>
-                  <span>欢迎您，{userInfo?.nickName || ''}</span>
-                  <Button style={{marginLeft: '10px'}} type="primary" onClick={exit}>退出</Button>
+                  {
+                     userInfo?.nickName ? <>
+                        <span>欢迎您，{userInfo.nickName || ''}</span>
+                        <Button style={{marginLeft: '10px'}} type="primary" onClick={exit}>退出</Button>
+                     </> : <><span>请登录</span></>
+                  }
                </div>
             </Header>
             <Content style={{ margin: '24px 16px', padding: 24, background: colorBgContainer }}>

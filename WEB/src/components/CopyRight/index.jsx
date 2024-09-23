@@ -12,7 +12,7 @@ import styles from './index.module.scss'
 const CopyRight = function () {
    return <div className={styles.copyRight}>
       <CopyrightOutlined />&nbsp;&nbsp;&nbsp;
-      <p className={styles.text}>2023 Build By H&D</p>
+      <p className={styles.text}>{new Date().getFullYear()} Build By H&D</p>
    </div>
 }
 

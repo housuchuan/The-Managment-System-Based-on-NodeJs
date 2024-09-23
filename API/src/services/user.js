@@ -13,7 +13,7 @@ const userModel = require('../models/user')
 
 const addSysUser = async ($values) => {
     try{
-        const {userName = '' ,passWord = '' , nickName = '', sex = 0, mobile = '', email = '', authorities = ''} = $values;
+        const {userName = '' ,passWord = '' , nickName = '新注册用户', sex = 0, mobile = '', email = '', authorities = 0} = $values;
         let salt = bcrypt.genSaltSync(10);
         let hashPWD = bcrypt.hashSync(passWord, salt);
         $values = [userName,hashPWD,nickName,sex,mobile,email,authorities];
@@ -60,9 +60,9 @@ const editSysUser = async (values) => {
 }
 
 // 模糊查询用户
-const querySysUsers = async (keyword) => {
+const querySysUsers = async (keyword, uuid) => {
     try{
-        let result = await userModel.querySysUsers(keyword)
+        let result = await userModel.querySysUsers(keyword, uuid)
         return result.map(({id = '',authorities = 0,email = '',mobile = '',nickName ='',sex = 0,userName = ''})=>({
             id,authorities,email,mobile,nickName,sex,userName
         }))

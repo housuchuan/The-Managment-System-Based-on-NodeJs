@@ -2,6 +2,7 @@ import { renderRoutes } from 'react-router-config';
 import { useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import {useEffect} from 'react';
+import { Watermark } from 'antd';
 import './App.scss';
 
 const App = ({ route }) => {
@@ -17,7 +18,9 @@ const App = ({ route }) => {
 
    return (
       <div>
-         {renderRoutes(route.routes)}
+         <Watermark content={'H&D Design ' + (userInfo?.userName || '')}>
+            {renderRoutes(route.routes)}
+         </Watermark>
       </div>
    );
 };

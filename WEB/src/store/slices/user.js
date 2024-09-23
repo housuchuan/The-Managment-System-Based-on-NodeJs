@@ -6,6 +6,7 @@
  * @LastEditors: housc
  */
 import { createSlice } from '@reduxjs/toolkit';
+
 const initUser = localStorage.getItem('USER_INFO') ? JSON.parse(localStorage.getItem('USER_INFO')) : null
 
 export const user = createSlice({
@@ -22,6 +23,7 @@ export const user = createSlice({
       clearUser: (state) => {
          state.userInfo = null
          localStorage.removeItem('USER_INFO')
+         window.location.replace('/')
       }
    }
 })

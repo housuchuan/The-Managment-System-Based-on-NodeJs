@@ -25,7 +25,7 @@ const index = () => {
       {
          key: 'register',
          label: '账号注册',
-         children: <Register />,
+         children: <Register onChange={label => setActiveKey(label)} />,
       }
    ]
 

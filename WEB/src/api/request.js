@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { message } from 'antd'
 import store from '@/store'
+import { clearUser } from '@/store/slices/user';
 
 const instance = axios.create({
    baseURL: process.env.API_BASE_URL,
@@ -22,6 +23,11 @@ instance.interceptors.request.use( config => {
 instance.interceptors.response.use(function (response) {
    let data = response.data
    if(data.status === 200) return data
+   // 未登录
+   if(data.status === 202) {
+      store.dispatch(clearUser())
+      return
+   }
    message.error(data.message).then(() => {})
    return Promise.reject(data)
 }, function (error) {

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux';
 import { Space, Button, Table, Tag, Input, Popconfirm, Modal, Form, Select, message } from 'antd'
 import { UserAddOutlined } from '@ant-design/icons'
 import { user } from '@/api'
@@ -20,44 +21,54 @@ const UserTags = [{
 }]
 const userSex = [{ value: 0, label: '女' },
    { value: 1, label: '男' }]
-const columns = [
-   {
-      title: '用户名',
-      dataIndex: 'userName',
-      key: 'userName',
-      render: (text) => <a>{text}</a>
-   },
-   {
-      title: '用户昵称',
-      dataIndex: 'nickName',
-      key: 'nickName'
-   },
-   {
-      title: '性别',
-      dataIndex: 'sex',
-      key: 'sex',
-      render: (sex) => sex === 1 ? '男' : '女'
-   },
-   {
-      title: '手机号',
-      dataIndex: 'mobile',
-      key: 'mobile'
-   },
-   {
-      title: '邮箱',
-      dataIndex: 'email',
-      key: 'email'
-   },
-   {
-      title: '用户权限',
-      key: 'authorities',
-      dataIndex: 'authorities',
-      render: (_, { authorities }) => {
-         const color = authorities === 3 ? 'geekblue' : authorities === 2 ? 'green' : 'volcano'
-         return (<Tag color={color} key={authorities}>{UserTags[authorities].label}</Tag>)
+const Index = () => {
+   // 模态框状态
+   const [isModalOpen, setIsModalOpen] = useState(false)
+   const [userTags] = useState(UserTags)
+   const [userInfo, setUserInfo] = useState(null)
+   const [form] = Form.useForm()
+   const [messageApi, contextHolder] = message.useMessage()
+   const USER = useSelector(state => state.user)
+
+   const columns = [
+      {
+         title: '用户名',
+         dataIndex: 'userName',
+         key: 'userName',
+         render: (text) => <a>{text}</a>
+      },
+      {
+         title: '用户昵称',
+         dataIndex: 'nickName',
+         key: 'nickName'
+      },
+      {
+         title: '性别',
+         dataIndex: 'sex',
+         key: 'sex',
+         render: (sex) => sex === 1 ? '男' : '女'
+      },
+      {
+         title: '手机号',
+         dataIndex: 'mobile',
+         key: 'mobile'
+      },
+      {
+         title: '邮箱',
+         dataIndex: 'email',
+         key: 'email'
+      },
+      {
+         title: '用户权限',
+         key: 'authorities',
+         dataIndex: 'authorities',
+         render: (_, row) => {
+            let { authorities = 0 } = row || {}
+            const color = authorities === 3 ? 'geekblue' : authorities === 2 ? 'green' : 'volcano'
+            return (<Tag color={color} key={authorities}>{UserTags[authorities].label}</Tag>)
+         }
       }
-   },
-   {
+   ].concat((USER.userInfo?.authorities || 0) === 3 && {
       title: '操作',
       key: 'action',
       render: (_, record) => (
@@ -68,15 +79,8 @@ const columns = [
             </Popconfirm>
          </Space>
       )
-   }
-]
-const Index = () => {
-   // 模态框状态
-   const [isModalOpen, setIsModalOpen] = useState(false)
-   const [userTags] = useState(UserTags)
-   const [userInfo, setUserInfo] = useState(null)
-   const [form] = Form.useForm()
-   const [messageApi, contextHolder] = message.useMessage()
+   } || [])
+
    // 展示用户信息模态框
    const showUserModal = (user = null) => {
       setUserInfo(user)

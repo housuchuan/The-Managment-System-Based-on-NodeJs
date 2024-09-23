@@ -1,5 +1,5 @@
 const express = require('express')
-const { addSysUser, querySysUsers, editSysUser, removeSysUser, sysUserLogin } = require("../controllers/user")
+const { addSysUser, querySysUsers, editSysUser, removeSysUser, sysUserLogin, registerSysUser } = require("../controllers/user")
 const vertifyAuth = require('../utils/vertifyAuth')
 
 const user = express.Router()
@@ -18,5 +18,8 @@ user.get('/querySysUsers', vertifyAuth.verify, querySysUsers)
 
 //用户登录
 user.post('/sysUserLogin',sysUserLogin)
+
+// 用户注册
+user.post('/registerSysUser', registerSysUser)
 
 module.exports = user
