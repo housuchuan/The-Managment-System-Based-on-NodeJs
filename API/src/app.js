@@ -2,7 +2,8 @@ const express = require("express"),
     cors = require('cors'),
     app = express(),
     PORT = process.env.PORT || 3000,
-    user = require('./routes/user');
+    user = require('./routes/user'),
+    role = require('./routes/role');
 
 // 处理cors
 app.use(cors({
@@ -23,6 +24,7 @@ app.use(express.json())
 
 //注册用户路由
 app.use('/user',user)
+app.use('/role',role)
 
 app.listen(PORT,err=>{
     if(err) console.log(err)
